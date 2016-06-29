@@ -6,14 +6,13 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
 var rest = require('./routes/rest');
 
 var app = express();
 
 var mongoose    = require('mongoose');
 
-// [ CONFIGURE mongoose ]
+// [ CONFIGURE mongoose ] - [START]
 // CONNECT TO MONGODB SERVER
 var db = mongoose.connection;
 db.on('error', console.error);
@@ -23,6 +22,7 @@ db.once('open', function(){
 });
  
 mongoose.connect('mongodb://localhost/mongodb_tutorial');
+// [ CONFIGURE mongoose ] - [END]
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -39,7 +39,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
 app.use('/rest', rest);
 
 // catch 404 and forward to error handler
@@ -48,7 +47,6 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-
 // error handlers
 
 // development error handler

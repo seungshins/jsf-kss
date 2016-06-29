@@ -11,6 +11,21 @@ Please don't use for commercial
 (node_modules delete & npm install)
 
 
+## Running Background Daemon
+
+### Using Forever npm module
+
+- $ npm install -g forever
+
+#### forever execute example
+
+> Start app 
+- $ forever --minUptime 5 --spinSleepTime 5 start app.js
+
+> Stop app
+- $ forever list
+- $ forever stop 0 (it will be changed.. see the result of list command)
+
 ## Mongo-DB Install
 
 - $ sudo apt-get install -y mongodb-org
@@ -35,7 +50,12 @@ Please don't use for commercial
 ### using Linux Machine
 - $ sudo apt-get install mysql-server
 
-### PRE-REQUISITE
+## Switch DB Protocol (MongoDB -> MySQL) 
+- $ mv ./jsf-server/app.js ./jsf-server/app_mongodb.js && mv ./jsf-server/app_mysql.js ./jsf-server/app.js
+
+
+
+## PRE-REQUISITE
 
 - $ npm install -g express
 - $ npm install -g express-generator
