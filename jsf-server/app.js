@@ -7,8 +7,22 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var rest = require('./routes/rest');
 
 var app = express();
+
+var mongoose    = require('mongoose');
+
+// [ CONFIGURE mongoose ]
+// CONNECT TO MONGODB SERVER
+var db = mongoose.connection;
+db.on('error', console.error);
+db.once('open', function(){
+    // CONNECTED TO MONGODB SERVER
+    console.log("Connected to mongod server");
+});
+ 
+mongoose.connect('mongodb://localhost/mongodb_tutorial');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -18,12 +32,15 @@ app.set('view engine', 'jade');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/rest', rest);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -55,6 +72,7 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
 
 
 module.exports = app;
