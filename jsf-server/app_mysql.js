@@ -6,23 +6,29 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var rest = require('./routes/rest');
+var rest1 = require('./routes/rest1');
 
 var app = express();
 
-var mongoose    = require('mongoose');
+var mysql = require('mysql');
 
-// [ CONFIGURE mongoose ] - [START]
-// CONNECT TO MONGODB SERVER
-var db = mongoose.connection;
-db.on('error', console.error);
-db.once('open', function(){
-    // CONNECTED TO MONGODB SERVER
-    console.log("Connected to mongod server");
+// [ CONFIGURE mysql ] - [START]
+var connection = mysql.createConnection({
+    host    :process.env.IP,
+    port : 3306,
+    user : 'root',
+    password : '1234',
+    database:'test'
 });
- 
-mongoose.connect('mongodb://localhost/mongodb_tutorial');
-// [ CONFIGURE mongoose ] - [END]
+
+connection.connect(function(err) {
+    if (err) {
+        console.error('mysql connection error');
+        console.error(err);
+        throw err;
+    }
+});
+// [ CONFIGURE mysql ] - [END]
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -39,7 +45,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/rest', rest);
+app.use('/rest1', rest1);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
