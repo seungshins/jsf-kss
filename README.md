@@ -41,6 +41,9 @@ Please don't use for commercial
 - --bind_ip=$IP - Because you can't bind to 0.0.0.0
 - --rest - Runs on default port 28017
 
+## Let's try MongoDB Example
+https://github.com/seungshins/jsf-kss/wiki/Let's-try-MongoDB-Example
+
 ## MySQL Install
 
 ### using C9
