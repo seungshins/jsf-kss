@@ -36,6 +36,7 @@ Please don't use for commercial
 
 - $ ./mongod
 
+> Meaning of the mongod options
 - --dbpath=data - Because it defaults to /var/db (which isn't accessible)
 - --nojournal - Because mongodb usually pre-allocates 2 GB journal file (which exceeds Cloud9 disk space quota)
 - --bind_ip=$IP - Because you can't bind to 0.0.0.0
